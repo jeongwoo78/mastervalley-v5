@@ -204,16 +204,14 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
 
       {/* 스타일 선택 영역 */}
       <div className="style-section">
-        <div className="style-header">
-          <h3 className="style-title">
-            {mainCategory === 'movements' ? '🎨 미술사조를 선택하세요' :
-             mainCategory === 'masters' ? '🎨 거장을 선택하세요' :
-             '🎨 동양화를 선택하세요'}
-          </h3>
+        <h3 className="style-title">
+          {mainCategory === 'movements' ? '🎨 미술사조를 선택하세요' :
+           mainCategory === 'masters' ? '🎨 거장을 선택하세요' :
+           '🎨 동양화를 선택하세요'}
           <span className="style-price">
             {mainCategory === 'masters' ? '$0.25/변환' : '$0.20/변환'}
           </span>
-        </div>
+        </h3>
 
         {/* 전체 변환 버튼 */}
         <button 
@@ -222,7 +220,13 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
         >
           <span className="ft-icon">✨</span>
           <div className="ft-content">
-            <span className="ft-title">전체 변환</span>
+            <span className="ft-title">
+              전체변환({currentCategory.fullTransform.count}개)
+              <span className="ft-price">
+                {mainCategory === 'movements' ? '$2.00' :
+                 mainCategory === 'masters' ? '$1.50' : '$0.60'}
+              </span>
+            </span>
             <span className="ft-desc">{currentCategory.fullTransform.desc}</span>
           </div>
           {selectedStyle?.isFullTransform && <span className="selected-check">✓</span>}
@@ -390,23 +394,17 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
           box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
-        .style-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1rem;
-        }
-
         .style-title {
+          text-align: center;
           color: #2d3748;
-          margin: 0;
+          margin: 0 0 1rem;
           font-size: 1.1rem;
         }
 
         .style-price {
           color: #7c3aed;
-          font-size: 1rem;
           font-weight: 600;
+          margin-left: 1rem;
         }
 
         .full-transform-btn {
@@ -439,6 +437,7 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
           flex-direction: column;
           align-items: flex-start;
           gap: 0.25rem;
+          flex: 1;
         }
 
         .ft-title {
@@ -451,6 +450,12 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
           font-size: 0.85rem;
           color: rgba(255,255,255,0.9);
           text-align: left;
+        }
+
+        .ft-price {
+          color: rgba(255,255,255,0.9);
+          font-weight: 600;
+          margin-left: 1rem;
         }
 
         .style-grid {
