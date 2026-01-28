@@ -1,4 +1,5 @@
-// PicoArt v74 - ResultScreen (모바일 공유/저장 지원)
+// PicoArt v75 - ResultScreen (모바일 공유/저장 지원)
+// v75: 원본 이미지 깜빡임 버그 수정 (originalPhotoUrl state 캐싱)
 // v74: Capacitor Share/Filesystem 네이티브 API 지원
 // v72: 원본+1차교육 ↔ 결과+2차교육 스와이프
 // v71: displayConfig.js 컨트롤 타워 사용
@@ -63,6 +64,17 @@ const ResultScreen = ({
   
   // ========== 저장/공유 메뉴 ==========
   const [showSaveShareMenu, setShowSaveShareMenu] = useState(false);
+  
+  // v75: 원본 이미지 URL 캐싱 (깜빡임 방지)
+  const [originalPhotoUrl, setOriginalPhotoUrl] = useState(null);
+  
+  useEffect(() => {
+    if (originalPhoto) {
+      const url = URL.createObjectURL(originalPhoto);
+      setOriginalPhotoUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [originalPhoto]);
   
   // v72: viewIndex - 원본/결과 스와이프용 (-1: 원본, 0~n: 결과)
   // 초기값: currentIndex와 동기화 (갤러리 갔다와도 유지)
@@ -1928,7 +1940,7 @@ const ResultScreen = ({
         {/* v73: 통합 함수 사용 */}
         {isFullTransform && viewIndex === -1 && getPrimaryEducation() && (
           <div className="preview-card">
-            <img src={URL.createObjectURL(originalPhoto)} alt="원본 사진" className="preview-image" />
+            <img src={originalPhotoUrl} alt="원본 사진" className="preview-image" />
             <div className="preview-info">
               <div className="preview-header">
                 <span className="preview-icon">
@@ -1960,7 +1972,7 @@ const ResultScreen = ({
         {/* v73: 통합 함수 사용 */}
         {!isFullTransform && viewIndex === -1 && getPrimaryEducation() && (
           <div className="preview-card">
-            <img src={URL.createObjectURL(originalPhoto)} alt="원본 사진" className="preview-image" />
+            <img src={originalPhotoUrl} alt="원본 사진" className="preview-image" />
             <div className="preview-info">
               <div className="preview-header">
                 <span className="preview-icon">

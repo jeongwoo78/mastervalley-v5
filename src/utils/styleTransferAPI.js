@@ -2,7 +2,7 @@
 import { MODEL_CONFIG } from './modelConfig';
 
 // API 기본 URL (앱에서는 절대 경로 필요)
-const API_BASE_URL = 'https://mastervalley-v1.vercel.app';
+const API_BASE_URL = 'https://mastervalley-v5.vercel.app';
 
 const fileToBase64 = async (file) => {
   return new Promise((resolve, reject) => {
@@ -111,16 +111,9 @@ const callFluxAPI = async (photoBase64, stylePrompt, onProgress) => {
 };
 
 const callFluxWithAI = async (photoBase64, selectedStyle, onProgress, correctionPrompt = null) => {
-  // 카테고리별 메시지
+  // 통일된 메시지
   if (onProgress) {
-    const category = selectedStyle?.category;
-    if (category === 'masters') {
-      onProgress('마스터 작업 중...');
-    } else if (category === 'oriental') {
-      onProgress('화풍 매칭 중...');
-    } else {
-      onProgress('화가 선택 중...');
-    }
+    onProgress('거장 작업 중...');
   }
 
   const requestBody = {

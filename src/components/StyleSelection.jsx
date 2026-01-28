@@ -120,12 +120,6 @@ const StyleSelection = ({ onSelect }) => {
   return (
     <div className="style-selection">
       <div className="selection-container">
-        <div className="selection-header">
-          <h1>🎨 화풍 선택</h1>
-          <p className="header-subtitle">
-            총 {artStyles.length}개의 화가와 스타일
-          </p>
-        </div>
 
         {/* 1단계: 대 카테고리 선택 */}
         <div className="main-category-nav">
@@ -149,8 +143,8 @@ const StyleSelection = ({ onSelect }) => {
         <>
           <div className="styles-section">
             <div className="section-header">
-              <h2>미술사조</h2>
-              <p className="section-period">서양 미술의 흐름</p>
+              <h2>🎨 미술사조를 선택하세요</h2>
+              <p className="section-price">$0.20/변환</p>
             </div>
             
             {/* 전체 변환 버튼 */}
@@ -207,9 +201,13 @@ const StyleSelection = ({ onSelect }) => {
             {groupedStyles[subCategory] && (
               <>
                 <div className="section-header">
-                  <h2>{groupedStyles[subCategory].category.name}</h2>
-                  <p className="section-period">
-                    {groupedStyles[subCategory].category.period}
+                  <h2>
+                    {mainCategory === 'masters' 
+                      ? '🎨 거장을 선택하세요' 
+                      : '🎨 동양화를 선택하세요'}
+                  </h2>
+                  <p className="section-price">
+                    {mainCategory === 'masters' ? '$0.25/변환' : '$0.20/변환'}
                   </p>
                 </div>
 
@@ -252,7 +250,7 @@ const StyleSelection = ({ onSelect }) => {
                       name: '동아시아 천 년의 미학',
                       category: 'oriental',
                       isFullTransform: true,
-                      count: 6
+                      count: 3
                     })}
                   >
                     <span className="full-transform-icon">✨</span>
@@ -484,6 +482,13 @@ const StyleSelection = ({ onSelect }) => {
         .section-period {
           font-size: 1rem;
           color: #718096;
+          margin: 0;
+        }
+
+        .section-price {
+          font-size: 1rem;
+          color: #7c3aed;
+          font-weight: 600;
           margin: 0;
         }
 
