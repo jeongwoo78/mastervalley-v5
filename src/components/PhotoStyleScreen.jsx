@@ -168,13 +168,6 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
         </div>
       </div>
 
-      {/* 안내 메시지 */}
-      {getGuideMessage() && (
-        <div className="guide-message">
-          {getGuideMessage()}
-        </div>
-      )}
-
       {/* 사진 업로드 영역 */}
       <div className="photo-section">
         <div
