@@ -40,13 +40,13 @@ const ProcessingScreen = ({ photo, selectedStyle, onComplete }) => {
     if (isFullTransform) {
       // 원클릭: 1차 교육 표시 후 순차 변환 (단일 변환 반복!)
       setShowEducation(true);
-      setStatusText(`${totalCount}개 스타일 변환을 시작합니다...`);
+      setStatusText(`${totalCount}개 스타일 작업을 시작합니다...`);
       await sleep(1500);
       
       const results = [];
       for (let i = 0; i < styles.length; i++) {
         const style = styles[i]; // 공통 데이터에서 가져온 스타일 (category 포함)
-        setStatusText(`[${i + 1}/${totalCount}] ${style.name} 변환 중...`);
+        setStatusText(`[${i + 1}/${totalCount}] ${style.name} 작업 중...`);
         
         // 단일 변환과 동일하게 호출!
         const result = await processSingleStyle(style, i, totalCount);
@@ -61,7 +61,7 @@ const ProcessingScreen = ({ photo, selectedStyle, onComplete }) => {
       }
       
       const successCount = results.filter(r => r.success).length;
-      setStatusText(`완료! ${successCount}/${totalCount}개 변환 성공`);
+      setStatusText(`완료! ${successCount}/${totalCount}개 작업 성공`);
       await sleep(1000);
       
       onComplete(selectedStyle, results, { isFullTransform: true, category, results });
@@ -70,14 +70,14 @@ const ProcessingScreen = ({ photo, selectedStyle, onComplete }) => {
       setShowEducation(true);
       const eduContent = getSingleEducationContent(selectedStyle);
       if (eduContent) {
-        setStatusText(`${eduContent.title} 스타일 분석 중...`);
+        setStatusText(`사진 분석 중...`);
       }
       await sleep(1000);
       
       const result = await processSingleStyle(selectedStyle);
       
       if (result.success) {
-        setStatusText(`${result.aiSelectedArtist || selectedStyle.name} 화풍으로 변환 완료!`);
+        setStatusText(`${result.aiSelectedArtist || selectedStyle.name} 화풍으로 작업 완료!`);
         await sleep(1000);
         onComplete(selectedStyle, result.resultUrl, result);
       } else {
@@ -593,7 +593,7 @@ const ProcessingScreen = ({ photo, selectedStyle, onComplete }) => {
       >
         {/* 헤더 */}
         <div className="header">
-          <h2>{isFullTransform ? '✨ 전체 변환' : '🎨 변환 중'}</h2>
+          <h2>{isFullTransform ? '✨ 전체 변환' : '🎨 작업 중'}</h2>
         </div>
 
         {/* 상태 */}

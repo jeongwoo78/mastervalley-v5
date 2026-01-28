@@ -177,7 +177,7 @@ const pollPrediction = async (predictionId, modelConfig, onProgress) => {
 
     if (onProgress) {
       const progress = Math.min(95, 10 + (attempts * 1.0));
-      onProgress(`변환 중... ${Math.floor(progress)}%`);
+      onProgress(`작업 중... ${Math.floor(progress)}%`);
     }
   }
 
@@ -347,7 +347,7 @@ export const mockStyleTransfer = async (photoFile, selectedStyle, onProgress) =>
     const interval = setInterval(() => {
       progress += 10;
       if (onProgress) {
-        onProgress(`${modelConfig.label} 변환 중... ${progress}%`);
+        onProgress(`${modelConfig.label} 작업 중... ${progress}%`);
       }
       
       if (progress >= 100) {
