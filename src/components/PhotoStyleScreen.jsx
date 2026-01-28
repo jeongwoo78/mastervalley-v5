@@ -204,7 +204,16 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
 
       {/* 스타일 선택 영역 */}
       <div className="style-section">
-        <h3 className="style-title">스타일 선택</h3>
+        <div className="style-header">
+          <h3 className="style-title">
+            {mainCategory === 'movements' ? '🎨 미술사조를 선택하세요' :
+             mainCategory === 'masters' ? '🎨 거장을 선택하세요' :
+             '🎨 동양화를 선택하세요'}
+          </h3>
+          <span className="style-price">
+            {mainCategory === 'masters' ? '$0.25/변환' : '$0.20/변환'}
+          </span>
+        </div>
 
         {/* 전체 변환 버튼 */}
         <button 
@@ -381,11 +390,23 @@ const PhotoStyleScreen = ({ mainCategory, onBack, onSelect }) => {
           box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
+        .style-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+
         .style-title {
-          text-align: center;
           color: #2d3748;
-          margin: 0 0 1rem;
-          font-size: 1.2rem;
+          margin: 0;
+          font-size: 1.1rem;
+        }
+
+        .style-price {
+          color: #7c3aed;
+          font-size: 1rem;
+          font-weight: 600;
         }
 
         .full-transform-btn {
